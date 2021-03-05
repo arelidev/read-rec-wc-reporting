@@ -1,0 +1,2 @@
+#wpe-fpm: php_values must be changed in .user.ini file. For more details please see https://wpengine.com/support/about-the-user-ini-file
+#deny from all
