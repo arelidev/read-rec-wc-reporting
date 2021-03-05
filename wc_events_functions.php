@@ -46,7 +46,7 @@ function get_order_against_product($prod, $order_status, $date = false)
     }
     if (is_array($prod)) {
         $prod = implode(",", $prod);
-    } 
+    }
 
     $ticket_args = array(
         'post_type' => 'product',
@@ -69,7 +69,7 @@ function get_order_against_product($prod, $order_status, $date = false)
         return;
     }
 
-    $query = "SELECT posts.ID as order_id,order_items.order_item_id FROM wp_posts AS posts INNER JOIN wp_woocommerce_order_items AS order_items ON posts.ID = order_items.order_id INNER JOIN wp_woocommerce_order_itemmeta AS order_item_meta__qty ON (order_items.order_item_id = order_item_meta__qty.order_item_id) AND (order_item_meta__qty.meta_key = '_qty') INNER JOIN wp_woocommerce_order_itemmeta AS order_item_meta__product_id_array ON order_items.order_item_id = order_item_meta__product_id_array.order_item_id WHERE posts.post_type IN ( 'shop_order' ) " . $date_string . " AND posts.post_status IN (" . $order_status . ") AND ( ( order_item_meta__product_id_array.meta_key IN ('_product_id','_variation_id') AND order_item_meta__product_id_array.meta_value IN ($product_ids1) ))";
+    $query = "SELECT posts.ID as order_id,order_items.order_item_id FROM 24GgrmQ_posts AS posts INNER JOIN 24GgrmQ_woocommerce_order_items AS order_items ON posts.ID = order_items.order_id INNER JOIN 24GgrmQ_woocommerce_order_itemmeta AS order_item_meta__qty ON (order_items.order_item_id = order_item_meta__qty.order_item_id) AND (order_item_meta__qty.meta_key = '_qty') INNER JOIN 24GgrmQ_woocommerce_order_itemmeta AS order_item_meta__product_id_array ON order_items.order_item_id = order_item_meta__product_id_array.order_item_id WHERE posts.post_type IN ( 'shop_order' ) " . $date_string . " AND posts.post_status IN (" . $order_status . ") AND ( ( order_item_meta__product_id_array.meta_key IN ('_product_id','_variation_id') AND order_item_meta__product_id_array.meta_value IN ($product_ids1) ))";
     //echo($query);
     $query_data = $wpdb->get_results($query);
 
@@ -273,8 +273,8 @@ function hm_sbp_export_body2($dest, $return = false, $cats_f, $date = array())
 
     $product_ids1 = implode(',', wp_list_pluck($ticket_query->posts, 'ID'));
 
-    $sql = "SELECT  posts.ID ,order_items.order_item_name,order_item_meta__line_total.meta_value,order_item_meta__product_id_array.meta_value AS product_id   FROM wp_posts AS posts 
-    INNER JOIN wp_woocommerce_order_items AS order_items ON posts.ID = order_items.order_id INNER JOIN wp_woocommerce_order_itemmeta AS order_item_meta__line_total ON (order_items.order_item_id = order_item_meta__line_total.order_item_id)  AND (order_item_meta__line_total.meta_key = '_line_total') INNER JOIN wp_woocommerce_order_itemmeta AS order_item_meta__product_id_array ON order_items.order_item_id = order_item_meta__product_id_array.order_item_id WHERE   posts.post_type     IN ( 'shop_order','shop_order_refund' ) AND     posts.post_status   IN ( 'wc-completed','wc-processing','wc-on-hold') AND   posts.post_date >= '{$newStartDate}' AND    posts.post_date <= '{$newEndDate}' AND ( ( order_item_meta__product_id_array.meta_key   IN ('_product_id','_variation_id') AND order_item_meta__product_id_array.meta_value IN ({$product_ids1}) ))";
+    $sql = "SELECT  posts.ID ,order_items.order_item_name,order_item_meta__line_total.meta_value,order_item_meta__product_id_array.meta_value AS product_id   FROM 24GgrmQ_posts AS posts 
+    INNER JOIN 24GgrmQ_woocommerce_order_items AS order_items ON posts.ID = order_items.order_id INNER JOIN 24GgrmQ_woocommerce_order_itemmeta AS order_item_meta__line_total ON (order_items.order_item_id = order_item_meta__line_total.order_item_id)  AND (order_item_meta__line_total.meta_key = '_line_total') INNER JOIN 24GgrmQ_woocommerce_order_itemmeta AS order_item_meta__product_id_array ON order_items.order_item_id = order_item_meta__product_id_array.order_item_id WHERE   posts.post_type     IN ( 'shop_order','shop_order_refund' ) AND     posts.post_status   IN ( 'wc-completed','wc-processing','wc-on-hold') AND   posts.post_date >= '{$newStartDate}' AND    posts.post_date <= '{$newEndDate}' AND ( ( order_item_meta__product_id_array.meta_key   IN ('_product_id','_variation_id') AND order_item_meta__product_id_array.meta_value IN ({$product_ids1}) ))";
 
     $result = $wpdb->get_results($sql);
 
